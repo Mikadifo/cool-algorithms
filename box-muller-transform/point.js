@@ -1,6 +1,5 @@
-let sigma = 0.4;
-let from = -1;
-let to = 1;
+let sigma = 0.1;
+let mu = 1;
 
 class Point {
   constructor(x = random(), y = random(), randomized = true) {
@@ -38,8 +37,27 @@ class Point {
     let theta = 2 * PI * tempY;
     let newX = sigma * r * cos(theta);
     let newY = sigma * r * sin(theta);
-    this.bigX = map(newX, from, to, 20, width - 20);
-    this.bigY = map(newY, from, to, 20, height - 20);
+    this.bigX = map(newX, -mu, mu, 20, width - 20);
+    this.bigY = map(newY, -mu, mu, 20, height - 20);
+  };
+
+  updatePolar = function () {
+    let tempX = this.x;
+    let tempY = this.x;
+    if (!this.randomized) {
+      tempX = map(this.x, 5, width - 5, -1, 1);
+      tempY = map(this.y, 5, height - 5, -1, 1);
+    }
+    let r = pow(tempX, 2) + pow(tempY, 2);
+    if (r === 0 || r > 1) {
+      this.bigX = 0;
+      this.bigY = 0;
+    } else {
+      let newX = sigma * tempX * sqrt((-2 * log(r)) / r) + mu;
+      let newY = sigma * tempY * sqrt((-2 * log(r)) / r) + mu;
+      this.bigX = map(newX, 0, 2, 5, width - 5);
+      this.bigY = map(newY, 0, 2, 5, height - 5);
+    }
   };
 
   static updateVariations() {

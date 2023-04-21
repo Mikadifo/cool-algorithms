@@ -2,16 +2,16 @@ const FPS = 30;
 const points = [];
 let animation = false;
 let animToggleButton;
-let orderStep = 15;
+let orderStep = 5;
 
 function setup() {
   noLoop();
   createCanvas(500, 500);
   frameRate(FPS);
-  //seedArrayRandom(1000);
   animToggleButton = createButton("Animation Toggle");
   animToggleButton.position(20, height + 20);
   animToggleButton.mousePressed(toggleLooping);
+  //seedArrayRandom(1000);
   seedArrayOrder(orderStep);
 }
 
@@ -32,7 +32,8 @@ function draw() {
 
 function updatePoints() {
   points.forEach((p) => {
-    p.update();
+    //p.update();
+    p.updatePolar();
   });
 }
 
