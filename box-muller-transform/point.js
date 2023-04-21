@@ -12,11 +12,19 @@ class Point {
   }
 
   display = function (step = 0) {
-    noFill();
+    //noFill();
     stroke("white");
-    strokeWeight(1);
-    circle(this.bigX, this.bigY, 5);
-    //point(this.bigX + step, this.bigY + step);
+    strokeWeight(3);
+    //triangle(
+    //this.bigX,
+    //this.bigY - 5,
+    //this.bigX - 5,
+    //this.bigY,
+    //this.bigX + 5,
+    //this.bigY
+    //);
+    //circle(this.bigX, this.bigY, 5);
+    point(this.bigX + step, this.bigY + step);
   };
 
   update = function () {
@@ -36,7 +44,7 @@ class Point {
 
   static updateVariations() {
     sigma += 0.1;
-    if (sigma >= 0.2 + width / 100) {
+    if (sigma >= width / 100) {
       sigma = 0;
     }
   }

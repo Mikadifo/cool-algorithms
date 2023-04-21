@@ -2,15 +2,17 @@ const FPS = 30;
 const points = [];
 let animation = false;
 let animToggleButton;
+let orderStep = 15;
 
 function setup() {
+  noLoop();
   createCanvas(500, 500);
   frameRate(FPS);
   //seedArrayRandom(1000);
-  seedArrayOrder(20);
   animToggleButton = createButton("Animation Toggle");
   animToggleButton.position(20, height + 20);
-  animToggleButton.mousePressed(() => toggleLooping());
+  animToggleButton.mousePressed(toggleLooping);
+  seedArrayOrder(orderStep);
 }
 
 function draw() {
@@ -26,12 +28,6 @@ function draw() {
     updatePoints();
     Point.updateVariations();
   }
-}
-
-function mousePressed() {
-  updatePoints();
-  animation = true;
-  redraw();
 }
 
 function updatePoints() {
@@ -59,7 +55,9 @@ function toggleLooping() {
     noLoop();
     animation = false;
   } else {
-    loop();
+    updatePoints();
     animation = true;
+    loop();
+    redraw();
   }
 }
