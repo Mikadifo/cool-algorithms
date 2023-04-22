@@ -12,7 +12,7 @@ let diselectAll = false;
 
 function setup() {
   createCanvas(600, 500);
-  seedArray(20);
+  seedArray(10);
   frameRate(FPS);
   sortButton = createButton("Sort");
   sortButton.mousePressed(sortArray);
