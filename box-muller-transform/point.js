@@ -1,6 +1,8 @@
 let sigma = 0.1;
 let mu = 1;
 
+let vel = 0.001;
+
 class Point {
   constructor(x = random(), y = random(), randomized = true) {
     this.randomized = randomized;
@@ -12,14 +14,15 @@ class Point {
 
   display = function (step = 0) {
     //noFill();
-    stroke("white");
+    stroke(random(0, 255), random(0, 255), random(0, 255));
+    //stroke("white");//for b&w
     strokeWeight(3);
     //triangle(
     //this.bigX,
-    //this.bigY - 5,
-    //this.bigX - 5,
+    //this.bigY - 1,
+    //this.bigX - 1,
     //this.bigY,
-    //this.bigX + 5,
+    //this.bigX + 1,
     //this.bigY
     //);
     //circle(this.bigX, this.bigY, 5);
@@ -61,9 +64,11 @@ class Point {
   };
 
   static updateVariations() {
-    sigma += 0.1;
+    sigma += vel;
+    if (sigma >= 0.3) vel += 0.01;
     if (sigma >= width / 100) {
       sigma = 0;
+      vel = 0.001;
     }
   }
 }

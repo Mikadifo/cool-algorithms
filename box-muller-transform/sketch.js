@@ -2,13 +2,13 @@ const FPS = 30;
 const points = [];
 let animation = false;
 let animToggleButton;
-let orderStep = 5;
+let orderStep = 20;
 
 function setup() {
   noLoop();
   createCanvas(500, 500);
   frameRate(FPS);
-  animToggleButton = createButton("Animation Toggle");
+  animToggleButton = createButton("Animate");
   animToggleButton.position(20, height + 20);
   animToggleButton.mousePressed(toggleLooping);
   //seedArrayRandom(1000);
