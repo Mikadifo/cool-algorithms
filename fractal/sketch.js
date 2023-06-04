@@ -1,11 +1,29 @@
 function setup() {
   createCanvas(600, 600);
   background("black");
+  stroke("white");
+  noLoop();
 }
 
 function draw() {
-  stroke("white");
-  let y = 550;
-  let x = 300;
-  line(x, 550, x, y - 50);
+  translate(width / 2, height);
+  branch(150);
+}
+
+function branch(len) {
+  line(0, 0, 0, -len);
+
+  if (len > 4) {
+    push();
+    translate(0, -len);
+    rotate(PI / 4);
+    branch(len * 0.67);
+    pop();
+
+    push();
+    translate(0, -len);
+    rotate(-PI / 4);
+    branch(len * 0.67);
+    pop();
+  }
 }
