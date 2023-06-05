@@ -29,6 +29,14 @@ This will open a port at 8000 and you can then go to http://localhost:8000/ and 
 Tool: [p5js](https://p5js.org/)\
 Reference: https://www.algorithm-archive.org/contents/box_muller/box_muller.html\
 
+## Bubble Sorting
+
+Tool: [p5js](https://p5js.org/)\
+
+## Fractal Tree
+
+Tool: [p5js](https://p5js.org/)\
+
 # Contribuing
 
 Everyone is welcome to make this project a little better and improve code or documentation. Help is always wanted and appreciated.
