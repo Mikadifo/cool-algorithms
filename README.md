@@ -31,11 +31,11 @@ Reference: https://www.algorithm-archive.org/contents/box_muller/box_muller.html
 
 ## Bubble Sorting
 
-Tool: [p5js](https://p5js.org/)\
+Tool: [p5js](https://p5js.org/)
 
 ## Fractal Tree
 
-Tool: [p5js](https://p5js.org/)\
+Tool: [p5js](https://p5js.org/)
 
 # Contribuing
 
