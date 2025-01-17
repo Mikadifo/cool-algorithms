@@ -1,7 +1,9 @@
-let lines = [];
 const FPS = 60;
+let lines = [];
+let oscillator;
+let soundDelay = 10; // in terms of iterations
+let oscFreq = 200;
 
-let isSolved = false;
 let sortingI = false;
 let sortingJ = false;
 let sortButton;
@@ -12,6 +14,11 @@ let diselectAll = false;
 
 function setup() {
   createCanvas(600, 500);
+
+  oscillator = new p5.Oscillator();
+  oscillator.amp(0);
+  oscillator.start();
+
   seedArray(10);
   frameRate(FPS);
   sortButton = createButton("Sort");
@@ -25,15 +32,36 @@ function draw() {
     if (diselectAll) {
       lin.diselectJ();
     }
+
     lin.display();
   });
+
   if (sortingI) {
+    getAudioContext()
+      .resume()
+      .then(() => {
+        oscillator.freq((oscFreq += 10));
+        oscillator.amp(1, 0.05);
+      });
+
     i++;
     next();
   }
+
   if (sortingJ) {
+    if (j % soundDelay === 0) {
+      oscillator.amp(0);
+    }
+
     j++;
     updateLine();
+  }
+
+  if (i >= lines.length - 1) {
+    console.log("SOLVED");
+    oscillator.amp(0, 0);
+    oscillator.stop();
+    noLoop();
   }
 }
 
@@ -43,14 +71,15 @@ function next() {
     lines[i - 1].diselectI();
     redraw();
   }
+
   lines[i].selectI();
   redraw();
+
   if (i < lines.length - 1) {
     minIndex = i;
     j = i + 1;
     updateLine();
   }
-  if (i >= lines.length) return noLoop();
 }
 
 function updateLine() {
@@ -74,6 +103,18 @@ function updateLine() {
 }
 
 function seedArray(step) {
+  let orderedHeights = [];
+  for (let i = 0; i < width - step * 2; i += step) {
+    orderedHeights.push(height - i);
+  }
+  shuffle(orderedHeights, true);
+
+  for (let i = 0; i < width - step * 2; i += step) {
+    lines.push(new Line(i + step, orderedHeights.pop(), step));
+  }
+}
+
+function seedRandomArray(step) {
   //let initialHeight = width / step;
   for (let i = 0; i < width - step * 2; i += step) {
     lines.push(new Line(i + step, random(step, height - step * 2), step)); //Random Heights
